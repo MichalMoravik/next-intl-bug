@@ -1,16 +1,16 @@
-import {routing} from '@/i18n/routing';
-import {hasLocale, NextIntlClientProvider} from 'next-intl';
-import {notFound} from 'next/navigation';
-import {ReactNode} from 'react';
+import { routing } from "@/i18n/routing";
+import { hasLocale } from "next-intl";
+import { notFound } from "next/navigation";
+import { ReactNode } from "react";
 
 type Props = {
   children: ReactNode;
-  params: Promise<{locale: string}>;
+  params: Promise<{ locale: string }>;
 };
 
-export default async function LocaleLayout({children, params}: Props) {
+export default async function LocaleLayout({ children, params }: Props) {
   // Ensure that the incoming `locale` is valid
-  const {locale} = await params;
+  const { locale } = await params;
   if (!hasLocale(routing.locales, locale)) {
     notFound();
   }
@@ -21,7 +21,7 @@ export default async function LocaleLayout({children, params}: Props) {
         <title>next-intl-bug-repro-app-router</title>
       </head>
       <body>
-        <NextIntlClientProvider>{children}</NextIntlClientProvider>
+        <main>{children}</main>
       </body>
     </html>
   );
